@@ -1,4 +1,4 @@
-Vectore
+Vectore-role
 =========
 This role can install Vector on Centos-hosts.
 
