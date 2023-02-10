@@ -18,7 +18,7 @@
 - name: Copy config
   become: true
   ansible.builtin.copy:
-    src: /files/vector.yaml
+    src: ./files/vector.yaml
     dest: /etc/vector/vector.yaml
     owner: root
     group: root
