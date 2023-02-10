@@ -1,0 +1,31 @@
+---
+# tasks file for vector-role
+- name: Creates directory tmp/vector/
+  become: true
+  file:
+    path: /tmp/vector/
+    state: directory
+- name: Get vector
+  become: true
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{vector_version}}/vector-{{vector_version}}-1.{{ arch }}.rpm"
+    dest: "/tmp/vector/vector-{{vector_version}}-1.{{ arch }}.rpm"
+- name: install vector
+  become: true
+  become_user: root
+  ansible.builtin.yum:
+    name: "/tmp/vector/vector-{{vector_version}}-1.{{ arch }}.rpm"
+- name: Copy config
+  become: true
+  ansible.builtin.copy:
+    src: /files/vector.yaml
+    dest: /etc/vector/vector.yaml
+    owner: root
+    group: root
+    mode: '644'
+- name: Restart vector service
+  become: true
+  ansible.builtin.systemd:
+    name: vector
+    state: restarted
+    daemon_reload: true
