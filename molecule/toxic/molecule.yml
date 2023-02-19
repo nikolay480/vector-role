@@ -2,10 +2,13 @@
 dependency:
   name: galaxy
 driver:
-  name: podman
+  name: docker
+  # options:
+  #   D: true
+  #   vv: true
 platforms:
-  - name: centos
-    image: quay.io/centos/centos:stream8
+  - name: centos7
+    image: quay.io/centos/centos:7
     pre_build_image: true
 provisioner:
   name: ansible
