@@ -2,14 +2,17 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: podman
   # options:
   #   D: true
   #   vv: true
 platforms:
-  - name: centos7
-    image: quay.io/centos/centos:7
+  - name: ubuntu
+    image: geerlingguy/docker-ubuntu2004-ansible
     pre_build_image: true
+lint: |
+  set -e
+  ansible-lint .
 provisioner:
   name: ansible
 verifier:
@@ -19,4 +22,5 @@ scenario:
    - destroy
    - create
    - converge
+   - idempotence
    - destroy

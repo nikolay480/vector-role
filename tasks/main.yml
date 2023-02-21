@@ -1,7 +1,7 @@
 ---
 # tasks file for vector-role
 - name: Creates directory /tmp/vector/
-  become: true
+  become: false
   ansible.builtin.file:
     path: /tmp/vector/
     state: directory
